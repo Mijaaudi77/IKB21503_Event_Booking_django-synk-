@@ -26,6 +26,7 @@ A secure web application for event booking management that implements OWASP Top 
 - **Security Tools:** OWASP ZAP, Bandit, Dependency Check
 
 ## 📁 Project Structure
+<pre>
 IKB21503_Event_Booking_Django/
 ├── accounts/                # User authentication & management
 │   ├── admin.py             # Django admin configuration for accounts
@@ -94,7 +95,7 @@ IKB21503_Event_Booking_Django/
     ├── lib/                 # Python libraries installed in venv
     ├── lib64 -> lib         # Symlink to lib
     └── pyvenv.cfg           # Virtual environment configuration file
-
+</pre>
 
 
 ## 🔧 Installation & Setup
