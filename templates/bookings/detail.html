@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}Booking Details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'booking_list' %}">Bookings</a></li>
+            <li class="breadcrumb-item active">Details</li>
+        </ol>
+    </nav>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0"><i class="fas fa-calendar-check"></i> Booking Details</h4>
+                    <span class="badge bg-light text-dark">{{ booking.id|truncatechars:10 }}</span>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th width="30%">Title:</th>
+                            <td>{{ booking.title }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description:</th>
+                            <td>{{ booking.description|default:"-"|linebreaks }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date:</th>
+                            <td>{{ booking.date }}</td>
+                        </tr>
+                        <tr>
+                            <th>Time:</th>
+                            <td>{{ booking.time|default:"Not specified" }}</td>
+                        </tr>
+                        <tr>
+                            <th>Created:</th>
+                            <td>{{ booking.created_at }}</td>
+                        </tr>
+                        <tr>
+                            <th>Last Updated:</th>
+                            <td>{{ booking.updated_at }}</td>
+                        </tr>
+                        <tr>
+                            <th>Status:</th>
+                            <td><span class="badge bg-success">Active</span></td>
+                        </tr>
+                    </table>
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'booking_update' booking.id %}" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Edit Booking
+                        </a>
+                        <a href="{% url 'booking_delete' booking.id %}" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Delete Booking
+                        </a>
+                        <a href="{% url 'booking_list' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="fas fa-user"></i> Owner Information</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Username:</strong> {{ booking.user.username }}</p>
+                    <p><strong>Email:</strong> {{ booking.user.email|default:"Not set" }}</p>
+                    <p><strong>User ID:</strong> {{ booking.user.id }}</p>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0"><i class="fas fa-shield-alt"></i> Security Info</h5>
+                </div>
+                <div class="card-body">
+                    <p><i class="fas fa-check text-success"></i> Access Control Verified</p>
+                    <p><i class="fas fa-check text-success"></i> Data Integrity Protected</p>
+                    <p><i class="fas fa-check text-success"></i> Audit Logged</p>
+                    <p class="text-muted small mt-3">
+                        <i class="fas fa-info-circle"></i>
+                        This booking is protected by RBAC (Role-Based Access Control).
+                        Only the owner can view or modify this booking.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

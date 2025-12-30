@@ -1,0 +1,17 @@
+# Core Django
+Django==5.0
+
+# Security essentials
+argon2-cffi==23.1.0  # For password hashing
+
+# Development tools
+python-dotenv==1.0.0  # For environment variables
+
+# Remove these if not absolutely needed:
+# django-crispy-forms==2.0  # Heavy for forms
+# axes==5.44.0  # Brute force protection (CPU intensive)
+# django-csp  # Content Security Policy
+
+# Security testing (only needed for assessment, not runtime)
+bandit==1.7.5
+safety==2.3.5

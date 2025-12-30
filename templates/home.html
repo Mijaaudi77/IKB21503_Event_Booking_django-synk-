@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4 mb-3">
+        <i class="fas fa-shield-alt text-primary"></i> Secure Booking System
+    </h1>
+    <p class="lead text-muted">
+        OWASP-Compliant Web Application | Secure Software Development Project
+    </p>
+    
+    <!-- Security Badges -->
+    <div class="my-4">
+        <span class="security-badge me-2">
+            <i class="fas fa-lock"></i> OWASP Top 10
+        </span>
+        <span class="security-badge me-2">
+            <i class="fas fa-user-shield"></i> Secure Auth
+        </span>
+        <span class="security-badge me-2">
+            <i class="fas fa-clipboard-check"></i> Audit Logging
+        </span>
+        <span class="security-badge">
+            <i class="fas fa-check-circle"></i> CSRF Protected
+        </span>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5><i class="fas fa-tasks"></i> Project Requirements Implemented</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-check text-success"></i> Functional Requirements</h6>
+                        <ul class="list-unstyled">
+                            <li>✅ User Registration & Login</li>
+                            <li>✅ Role-Based Access Control</li>
+                            <li>✅ Secure CRUD Operations</li>
+                            <li>✅ User Profile Management</li>
+                            <li>✅ Audit Log System</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="fas fa-shield-alt text-warning"></i> Security Requirements</h6>
+                        <ul class="list-unstyled">
+                            <li>✅ OWASP Top 10 Compliance</li>
+                            <li>✅ Input Validation & Sanitization</li>
+                            <li>✅ Secure Authentication</li>
+                            <li>✅ SQL Injection Prevention</li>
+                            <li>✅ XSS Protection</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5><i class="fas fa-rocket"></i> Quick Access</h5>
+            </div>
+            <div class="card-body text-center">
+                {% if user.is_authenticated %}
+                    <p>Welcome back, <strong>{{ user.username }}</strong>!</p>
+                    <p class="text-muted small">You are securely logged in.</p>
+                 <div class="d-grid gap-2">
+                           <a href="{% url 'profile' %}" class="btn btn-primary">
+                                <i class="fas fa-user"></i> My Profile
+                          </a>
+                               <a href="{% url 'booking_list' %}" class="btn btn-success">
+                                         <i class="fas fa-calendar"></i> My Bookings
+                            </a>
+                            <form method="post" action="{% url 'logout' %}" class="d-inline">
+                             {% csrf_token %}
+                             <button type="submit" class="btn btn-outline-danger w-100">
+                                <i class="fas fa-sign-out-alt"></i> Secure Logout
+                              </button>
+                          </form>
+                    </div>  
+                {% else %}
+                    <p>Get started with our secure system:</p>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'register' %}" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i> Register
+                        </a>
+                        <a href="{% url 'login' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-sign-in-alt"></i> Secure Login
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Security Features Section -->
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h5><i class="fas fa-shield-alt"></i> Security Features Overview</h5>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-3 mb-3">
+                        <div class="p-3 border rounded">
+                            <i class="fas fa-filter fa-2x text-primary mb-2"></i>
+                            <h6>Input Validation</h6>
+                            <small class="text-muted">Client & Server side validation</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="p-3 border rounded">
+                            <i class="fas fa-key fa-2x text-danger mb-2"></i>
+                            <h6>Password Security</h6>
+                            <small class="text-muted">Argon2 hashing, 12+ chars</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="p-3 border rounded">
+                            <i class="fas fa-user-tag fa-2x text-success mb-2"></i>
+                            <h6>Access Control</h6>
+                            <small class="text-muted">RBAC implementation</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="p-3 border rounded">
+                            <i class="fas fa-file-shield fa-2x text-warning mb-2"></i>
+                            <h6>CSRF Protection</h6>
+                            <small class="text-muted">Token-based protection</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

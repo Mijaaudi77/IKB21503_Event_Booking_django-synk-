@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Create New Booking{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-calendar-plus"></i> Create New Booking</h4>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title *</label>
+                            <input type="text" class="form-control" id="title" name="title" 
+                                   required maxlength="100" placeholder="Enter booking title">
+                            <small class="form-text text-muted">Required. Maximum 100 characters.</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" 
+                                      rows="4" placeholder="Enter booking description"></textarea>
+                            <small class="form-text text-muted">Optional. Provide details about your booking.</small>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="date" class="form-label">Date *</label>
+                                <input type="date" class="form-control" id="date" name="date" required>
+                                <small class="form-text text-muted">Required. Select booking date.</small>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="time" class="form-label">Time</label>
+                                <input type="time" class="form-control" id="time" name="time">
+                                <small class="form-text text-muted">Optional. Select booking time.</small>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-shield-alt"></i>
+                            <strong>Security Notice:</strong> This form is protected against SQL injection and XSS attacks.
+                            All inputs are validated server-side.
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Create Booking
+                            </button>
+                            <a href="{% url 'booking_list' %}" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-header bg-light">
+                    <h6 class="mb-0"><i class="fas fa-info-circle"></i> Security Features</h6>
+                </div>
+                <div class="card-body">
+                    <ul class="mb-0">
+                        <li><i class="fas fa-check text-success"></i> CSRF Token Protection</li>
+                        <li><i class="fas fa-check text-success"></i> Input Validation & Sanitization</li>
+                        <li><i class="fas fa-check text-success"></i> SQL Injection Prevention</li>
+                        <li><i class="fas fa-check text-success"></i> XSS Protection</li>
+                        <li><i class="fas fa-check text-success"></i> Audit Logging</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

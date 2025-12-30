@@ -1,0 +1,100 @@
+{% extends "admin/login.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    /* Login page customization */
+    .login {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .login #container {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        overflow: hidden;
+    }
+    
+    .login #header {
+        background: linear-gradient(to right, #2c3e50, #3498db);
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .login #branding h1 {
+        font-size: 1.8rem;
+        font-weight: 600;
+    }
+    
+    .login .form-row {
+        padding: 10px 0;
+    }
+    
+    .login .submit-row {
+        padding: 15px 0 0 0;
+        text-align: center;
+    }
+    
+    .login .submit-row input {
+        background: linear-gradient(to right, #3498db, #2980b9);
+        border: none;
+        padding: 12px 30px;
+        font-size: 1rem;
+        font-weight: 600;
+        width: 100%;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+    
+    .login .submit-row input:hover {
+        background: linear-gradient(to right, #2980b9, #1c6ea4);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .security-notice {
+        background: #f8f9fa;
+        border-left: 4px solid #3498db;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 0 5px 5px 0;
+    }
+    
+    .security-notice h3 {
+        color: #2c3e50;
+        margin-top: 0;
+        font-size: 1.1rem;
+    }
+    
+    .security-notice ul {
+        margin: 10px 0 0 20px;
+        color: #555;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="security-notice">
+    <h3><i class="fas fa-shield-alt"></i> Secure Admin Access</h3>
+    <p>This admin panel is protected by:</p>
+    <ul>
+        <li>OWASP Top 10 Security Controls</li>
+        <li>CSRF Protection</li>
+        <li>Secure Password Hashing (Argon2)</li>
+        <li>Session Timeout (30 minutes)</li>
+        <li>Audit Logging</li>
+    </ul>
+</div>
+{{ block.super }}
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:login' %}">
+        <i class="fas fa-shield-alt"></i> Secure Booking Admin Login
+    </a>
+</h1>
+{% endblock %}
